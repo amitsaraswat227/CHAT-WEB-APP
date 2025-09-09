@@ -8,6 +8,7 @@ import userRoute from "./routes/user.route.js";
 import messageRoute from "./routes/message.route.js";
 import { app, server } from "./SocketIO/server.js";
 import { v2 as cloudinary } from "cloudinary";
+import path from "path";
 
 dotenv.config();
 
@@ -37,6 +38,16 @@ try {
 //routes
 app.use("/api/user", userRoute);
 app.use("/api/message", messageRoute);
+
+//Deployment Code
+if(process.env.NODE_ENV === "production"){
+  const dirPath = path.resolve();
+
+  app.use(express.static("./Frontend/dist"));
+  app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(dirPath,"./Frontend/dist","index.html"));
+  })
+}
 
 server.listen(PORT, () => {
   console.log(`Server is Running on port ${PORT}`);

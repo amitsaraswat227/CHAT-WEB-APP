@@ -12,6 +12,7 @@
     "dependencies": {
         "@tailwindcss/vite": "^4.1.13",
         "axios": "^1.6.8",
+        "backend": "file:..",
         "cloudinary": "^2.7.0",
         "js-cookie": "^3.0.5",
         "react": "^18.2.0",
